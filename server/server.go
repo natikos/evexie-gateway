@@ -18,7 +18,7 @@ func NewGatewayServer() *GatewayServer {
 func (server *GatewayServer) Run() {
 	router := mux.NewRouter()
 
-	router.PathPrefix("/auth/{action}").Handler(&AuthHandler{})
+	router.PathPrefix("/auth/{action}").Handler(NewAuthHandler())
 
 	port := os.Getenv("PORT")
 
