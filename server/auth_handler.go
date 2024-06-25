@@ -20,7 +20,6 @@ func NewAuthHandler() *AuthHandler {
 func (h *AuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	command := vars["action"]
-	logger.Logger.Infoln(command)
 	switch r.Method {
 	case http.MethodPost:
 		h.handlePost(w, r, command)
@@ -36,7 +35,6 @@ func (h *AuthHandler) handlePost(w http.ResponseWriter, r *http.Request, command
 		http.Error(w, "Unable to read request body", http.StatusBadRequest)
 		return
 	}
-
 	message := map[string]interface{}{
 		"pattern": command,
 		"data":    json.RawMessage(body),
@@ -48,5 +46,5 @@ func (h *AuthHandler) handlePost(w http.ResponseWriter, r *http.Request, command
 		logger.Logger.Errorln(err)
 	}
 
-	broker.Broker.Publish(messageBytes, "auth")
+	broker.Broker.Publish(messageBytes, "users")
 }
