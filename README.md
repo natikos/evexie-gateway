@@ -6,4 +6,6 @@ Evexie Gateway is the central API gateway for the Evexie app, managing secure an
 
 ### Start RabbitMQ for communication
 
+```bash
 docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
+```
